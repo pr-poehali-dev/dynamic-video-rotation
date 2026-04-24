@@ -1,21 +1,36 @@
+import { useState } from 'react';
 import VideoPlayer from '@/components/VideoPlayer';
+import Icon from '@/components/ui/icon';
 
-const VIDEO_SOURCES = [
+const VIDEOS = [
   {
-    quality: '1080p',
-    src: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4',
+    sources: [
+      { quality: '1080p', src: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4' },
+      { quality: '720p', src: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4' },
+    ],
+    poster: 'https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/Big_buck_bunny_poster_big.jpg/1200px-Big_buck_bunny_poster_big.jpg',
   },
   {
-    quality: '720p',
-    src: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4',
+    sources: [
+      { quality: '1080p', src: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4' },
+      { quality: '720p', src: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4' },
+    ],
+    poster: 'https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/Big_buck_bunny_poster_big.jpg/1200px-Big_buck_bunny_poster_big.jpg',
   },
   {
-    quality: '480p',
-    src: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4',
+    sources: [
+      { quality: '1080p', src: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4' },
+      { quality: '720p', src: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4' },
+    ],
+    poster: 'https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/Big_buck_bunny_poster_big.jpg/1200px-Big_buck_bunny_poster_big.jpg',
   },
 ];
 
 export default function Index() {
+  const [current, setCurrent] = useState(0);
+
+  const goNext = () => setCurrent(i => (i + 1) % VIDEOS.length);
+
   return (
     <div
       className="min-h-screen flex flex-col items-center justify-center gap-6 px-4"
@@ -33,10 +48,24 @@ export default function Index() {
         style={{ boxShadow: '0 40px 80px rgba(0,0,0,0.7)' }}
       >
         <VideoPlayer
-          sources={VIDEO_SOURCES}
-          poster="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/Big_buck_bunny_poster_big.jpg/1200px-Big_buck_bunny_poster_big.jpg"
+          key={current}
+          sources={VIDEOS[current].sources}
+          poster={VIDEOS[current].poster}
         />
       </div>
+
+      <button
+        onClick={goNext}
+        className="flex items-center gap-3 font-montserrat text-white/70 hover:text-white transition-colors group"
+        style={{ letterSpacing: '0.15em', fontWeight: 500, fontSize: '0.8rem' }}
+      >
+        <span>СЛЕДУЮЩЕЕ ВИДЕО</span>
+        <Icon
+          name="ChevronRight"
+          size={18}
+          className="transition-transform group-hover:translate-x-1"
+        />
+      </button>
     </div>
   );
 }
