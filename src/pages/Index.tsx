@@ -22,8 +22,8 @@ export default function Index() {
       style={{ background: 'hsl(0 0% 4%)' }}
     >
       <h1
-        className="font-cormorant text-white text-3xl tracking-widest"
-        style={{ letterSpacing: '0.4em', fontWeight: 300 }}
+        className="font-montserrat text-white text-5xl md:text-6xl"
+        style={{ letterSpacing: '0.15em', fontWeight: 700 }}
       >
         OneFap
       </h1>

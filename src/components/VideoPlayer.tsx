@@ -184,27 +184,16 @@ export default function VideoPlayer({ sources, title, poster }: VideoPlayerProps
           paddingBottom: '1px'
         }}
       >
-        {/* Progress bar */}
+        {/* Progress bar (display only, no seek) */}
         <div className="relative px-4 pt-4 pb-1">
-          <div className="relative h-[3px] bg-white/15 w-full cursor-pointer">
-            {/* Buffered */}
+          <div className="relative h-[3px] bg-white/15 w-full">
             <div
               className="absolute top-0 left-0 h-full bg-white/25 transition-all"
               style={{ width: `${buffered}%` }}
             />
-            {/* Played */}
             <div
               className="absolute top-0 left-0 h-full transition-all"
               style={{ width: `${progressPercent}%`, background: 'hsl(38 92% 60%)' }}
-            />
-            <input
-              type="range"
-              min={0}
-              max={100}
-              value={progressPercent}
-              onChange={handleSeek}
-              className="video-progress absolute inset-0 w-full opacity-0 cursor-pointer"
-              style={{ height: '3px' }}
             />
           </div>
         </div>
